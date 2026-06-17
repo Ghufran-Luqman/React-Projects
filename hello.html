@@ -24,43 +24,22 @@
                         <div>
                             <h1>{this.state.count}</h1>
                             <button onClick={this.increment}>Increment</button>
+                            <button onClick={this.decrement}>Decrement</button>
                         </div>
                     );
                 }
 
                 increment = () => {
-                    /* if your new state is going to depend on the previous state, 
-                    react reccommends this instead to avoid against the 
-                    possibility of race conditions:*/
                     this.setState(oldState => ({ 
                         count: oldState.count + 1
                     }));
                 }
-                /* this is more secure because setState does not update the state immediately. 
-                when you call setState, it puts your request into a "to do list" or a queue, and
-                processes it a fraction of a second later in batches to save performance.
-                because of this delay, reading this.state.count directly can lead to a race condition.
-                if your count is currently 0, and you write code that calls your increment function
-                three times in a row instantly like inside a loop, then, if you use this.state.count + 1
-                then for the first call, react looks at this.state.count right now, and sees 0, so it puts
-                in its to do list "set count to 0+1".
-                second call, react hasn't processed the todo list yet so when it looks at this.state.count again,
-                it still sees 0, it puts another 0+1 on the to do list, same with the third call.
-                so then it only goes to 1.
-                but when you do oldState, you aren't looking at the state right now, you're giving
-                react a set of instructions to execute whenever it gets around to it.
-                so first call, it says take whatever the state is when you read this, and add 1.
-                and does that another 2 times.
-                Gemini says:
-                A Quick Analogy
-                    Imagine you have $10 in your bank account, and you want to deposit $1 three times.
-                    The bad way (this.state): You look at your balance ($10) and text your accountant 
-                    three times: "Hey, set my balance to $11." The accountant reads all three texts and 
-                    sets your balance to $11. You just lost money.
-                    The safe way (oldState): You text your accountant three times: "Hey, add 
-                    $1 to whatever my current balance is." The accountant processes them one by 
-                    one: $11, then $12, then $13.
-                */ 
+
+                decrement = () => {
+                    this.setState(oldState => ({
+                        count: oldState.count - 1
+                    }));
+                }
             }
 
             class App extends React.Component {
