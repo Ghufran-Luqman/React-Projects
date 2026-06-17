@@ -18,21 +18,20 @@
                         count: 0
                     };
                 }
-            }
-
-            class Hello extends React.Component {
 
                 render() {
                     return (
                         <div>
-                            <h1>Hello</h1>
-                            <button onClick={this.handleClick}>Click Here</button>
+                            <h1>{this.state.count}</h1>
+                            <button onClick={this.increment}>Increment</button>
                         </div>
                     );
                 }
 
-                handleClick = () => {
-                    alert("Hi!");
+                increment = () => {
+                    this.setState({
+                        count: this.state.count + 1
+                    });
                 }
             }
 
@@ -48,7 +47,7 @@
 
             }
 
-            ReactDOM.render(<App />, document.querySelector("#app"));
+            ReactDOM.render(<Counter />, document.querySelector("#app"));
         </script>
     </body>
 </html>
