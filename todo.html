@@ -5,6 +5,11 @@
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
         <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
         <title>To-Do List</title>
+        <style>
+            body {
+                background-color: rgb(196, 174, 215);
+            }
+        </style>
     </head>
     <body>
         <div id="app"></div>
@@ -16,7 +21,8 @@
                     super(props);
                     this.state = {
                         tasks: [],
-                        input: ""
+                        input: "",
+                        numberOfTasks: 0
                     };
                 }
             
@@ -28,15 +34,28 @@
                                 {this.state.tasks.map((task, i) =>
                                     <li key={i}>
                                         {task}
+                                        <button onClick={() => this.deleteTask(i)}>Delete</button>
                                     </li>
                                 )}
                             </ul>
-                            <div>
-                                <input onChange={this.handleChange} value={this.state.input} />
-                                <button onClick={this.addTask}>Add Task</button>
-                            </div>
+                            <form onSubmit={this.addTask}>
+                                <input onChange={this.handleChange} value={this.state.input} autoFocus />
+                                <button type="submit">Add Task</button>
+                            </form>
+                            Number of Tasks: {this.state.numberOfTasks}
                         </div>
                     );
+                }
+
+                deleteTask = (i) => {
+                    this.setState(state => {
+                        const tasksCopy = [...state.tasks];
+                        tasksCopy.splice(i, 1);
+                        return {
+                            tasks: tasksCopy,
+                            numberOfTasks: state.numberOfTasks - 1
+                        };
+                    });
                 }
 
                 handleChange = (event) => {
@@ -45,10 +64,13 @@
                     });
                 }
 
-                addTask = () => {
+                addTask = (event) => {
+                    event.preventDefault();
                     this.setState(state => ({
-                        tasks: [...state.tasks, state.input]
-                    }))
+                        tasks: [...state.tasks, state.input],
+                        numberOfTasks: state.numberOfTasks + 1,
+                        input: ""
+                    }));
                 }
 
             }
