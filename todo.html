@@ -15,7 +15,7 @@
                 constructor(props) {
                     super(props);
                     this.state = {
-                        tasks: ["thing one", "thing two", "thing three"],
+                        tasks: [],
                         input: ""
                     };
                 }
@@ -31,8 +31,24 @@
                                     </li>
                                 )}
                             </ul>
+                            <div>
+                                <input onChange={this.handleChange} value={this.state.input} />
+                                <button onClick={this.addTask}>Add Task</button>
+                            </div>
                         </div>
                     );
+                }
+
+                handleChange = (event) => {
+                    this.setState({
+                        input: event.target.value
+                    });
+                }
+
+                addTask = () => {
+                    this.setState(state => ({
+                        tasks: [...state.tasks, state.input]
+                    }))
                 }
 
             }
