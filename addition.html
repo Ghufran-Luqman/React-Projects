@@ -5,6 +5,11 @@
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
         <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
         <title>Addition</title>
+        <style>
+            .incorrect {
+                color: red;
+            }
+        </style>
     </head>
     <body>
         <div id="app"></div>
@@ -18,19 +23,34 @@
                         num1: 1,
                         num2: 1,
                         score: 0,
-                        response: ""
+                        response: "",
+                        incorrect: false
                     }
                 }
 
                 render() {
-                    return (
+                    if (this.state.score >= 5) {
+                        return this.renderWin();
+                    } else {
+                        return this.renderProblem();
+                    }
+                }
+
+                renderProblem() {
+                    return ( // ternary operator: boolean_expression ? value_if_true : value_if_false
                         <div>
-                            <h1>{this.state.num1} + {this.state.num2}</h1>
+                            <h1 className={this.state.incorrect ? "incorrect" : ""}>{this.state.num1} + {this.state.num2}</h1>
                             <input onKeyPress={this.inputKeyPress} onChange={this.updateResponse} value={this.state.response} />
                             <div>
                                 Score: {this.state.score}
                             </div>
                         </div>
+                    );
+                }
+                
+                renderWin () {
+                    return (
+                        <h1>Congratulations! You win!</h1>
                     );
                 }
 
@@ -49,12 +69,14 @@
                                 score: state.score + 1,
                                 num1: Math.ceil(Math.random() * 10),
                                 num2: Math.ceil(Math.random() * 10),
-                                response: ""
+                                response: "",
+                                incorrect: false
                             }));
                         } else {
                             // Answer is wrong
                             this.setState({
-                                response: ""
+                                response: "",
+                                incorrect: true
                             });
                         }
                     }
