@@ -29,9 +29,12 @@
                 }
 
                 increment = () => {
-                    this.setState({
-                        count: this.state.count + 1
-                    });
+                    /* if your new state is going to depend on the previous state, 
+                    react reccommends this instead to avoid against the 
+                    possibility of race conditions:*/
+                    this.setState(oldState => ({ 
+                        count: oldState.count + 1
+                    }));
                 }
             }
 
