@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <title>To-Do List</title>
+        <style>
+            .completed {
+                text-decoration: line-through;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="text/babel">
+
+            class App extends React.Component {
+
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        tasks: [],
+                        input: "",
+                        numberOftasks: 0
+                    };
+                }
+            
+                render() {
+                    return (
+                        <div>
+                            <h1>To-Do List</h1>
+                            <form onSubmit={this.addTask}>
+                                <input autoFocus onChange={this.updateResponse} value={this.state.input} />
+                                <button type="submit">Add Task</button>
+                            </form>
+                            Number of tasks: {this.state.numberOftasks}.
+                            <ul>
+                                {this.state.tasks.map((task) => 
+                                    <li key={task.id}>
+                                        <span className={task.isCompleted ? "completed" : ""}>{task.text}</span>
+                                        <button onClick={() => this.deleteTask(task.id)}>Delete</button>
+                                        <button onClick={() => this.completeTask(task.id)}>Complete</button>
+                                    </li>
+                                )}
+                            </ul>
+                        </div>
+                    );
+                }
+
+                completeTask = (taskId) => {
+                    this.setState(state => {
+                        const updatedTasks = state.tasks.map((task) => {
+                            if (task.id === taskId) {
+                                return {...task, isCompleted: !task.isCompleted};
+                            }
+                            return task;
+                        });
+
+                        return {
+                            tasks: updatedTasks
+                        };
+                    });
+                }
+
+                deleteTask = (taskId) => {
+                    this.setState(state => {
+                        const tasksCopy = state.tasks.filter(task => task.id !== taskId);
+                        return {
+                            tasks: tasksCopy,
+                            numberOftasks: state.numberOftasks - 1
+                        };
+                    });
+                }
+
+                addTask = (event) => {
+                    event.preventDefault();
+                    if (!this.state.input.trim()) return; // if empty don't add task
+
+                    this.setState(state => ({
+                        tasks: [...state.tasks, {id: Date.now(), text: state.input, isCompleted: false}],
+                        numberOftasks: state.numberOftasks + 1,
+                        input: ""
+                    }));
+                }
+
+                updateResponse = (event) => {
+                    this.setState ({
+                        input: event.target.value
+                    });
+                }
+
+            }
+
+            ReactDOM.render(<App />, document.querySelector("#app"));
+        </script>
+    </body>
+</html>
