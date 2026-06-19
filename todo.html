@@ -34,7 +34,7 @@
                                 {this.state.tasks.map((task, i) =>
                                     <li key={i}>
                                         {task}
-                                        <button onClick={() => this.deleteTask(i)}>Delete</button>
+                                        <button data-index={i} onClick={this.deleteTask}>Delete</button>
                                     </li>
                                 )}
                             </ul>
@@ -47,10 +47,11 @@
                     );
                 }
 
-                deleteTask = (i) => {
+                deleteTask = (event) => {
+                    const index = event.target.dataset.index;
                     this.setState(state => {
                         const tasksCopy = [...state.tasks];
-                        tasksCopy.splice(i, 1);
+                        tasksCopy.splice(index, 1);
                         return {
                             tasks: tasksCopy,
                             numberOfTasks: state.numberOfTasks - 1
