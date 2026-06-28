@@ -11,46 +11,39 @@
         <script type="text/babel">
 
             class CardEditor extends React.Component {
-                
-                render () {
+
+
+                render() {
+                    const rows = this.props.card.map((card, i) => {
+                        return (
+                            <tr key={i}>
+                                <td>{card.front}</td>
+                                <td>{card.back}</td>
+                                <td><button>Delete</button></td>
+                            </tr>
+                        )
+                    })
+
                     return (
                         <div>
-                            This is the editor.
+                            <h1>Card Editor</h1>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Front</th>
+                                        <th>Back</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {rows}
+                                </tbody>
+                            </table>
                             <hr />
                             <button onClick={this.props.switchMode}>Go to viewer</button>
                         </div>
-                    );
+                    )
                 }
-
-                // render() {
-                //     const rows = this.props.card.map((card, i) => {
-                //         return (
-                //             <tr key={i}>
-                //                 <td>{card.front}</td>
-                //                 <td>{card.back}</td>
-                //                 <td><button>Delete</button></td>
-                //             </tr>
-                //         )
-                //     })
-
-                //     return (
-                //         <div>
-                //             <h1>Card Editor</h1>
-                //             <table>
-                //                 <thead>
-                //                     <tr>
-                //                         <th>Front</th>
-                //                         <th>Back</th>
-                //                         <th>Delete</th>
-                //                     </tr>
-                //                 </thead>
-                //                 <tbody>
-                //                     {rows}
-                //                 </tbody>
-                //             </table>
-                //         </div>
-                //     )
-                // }
             }
 
             class CardViewer extends React.Component {
@@ -72,7 +65,7 @@
                         editor: true,
                         cards: [{front: "1front", back: "1back"},
                                 {front: "2front", back: "2back"}]
-                    }
+                    };
                 }
 
 
@@ -83,13 +76,14 @@
                                 cards = {this.state.cards}
                                 switchMode = {this.switchMode}
                             />
-                        )
+                        );
                     } else {
                         return (
                             <CardViewer
+                                cards = {this.state.cards}
                                 switchMode = {this.switchMode}
                             />
-                        )
+                        );
                     }
                 }
 
