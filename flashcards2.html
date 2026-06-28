@@ -17,7 +17,7 @@
                         <div>
                             This is the editor.
                             <hr />
-                            <button>Go to viewer</button>
+                            <button onClick={this.props.switchMode}>Go to viewer</button>
                         </div>
                     );
                 }
@@ -59,7 +59,7 @@
                         <div>
                             This is the Viewer.
                             <hr />
-                            <button>Go to editor</button>
+                            <button onClick={this.props.switchMode}>Go to editor</button>
                         </div>
                     );
                 }
@@ -81,11 +81,14 @@
                         return (
                             <CardEditor 
                                 cards = {this.state.cards}
+                                switchMode = {this.switchMode}
                             />
                         )
                     } else {
                         return (
-                            <CardViewer />
+                            <CardViewer
+                                switchMode = {this.switchMode}
+                            />
                         )
                     }
                 }
