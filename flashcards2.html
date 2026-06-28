@@ -5,6 +5,62 @@
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
         <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
         <title>Flashcards 2</title>
+        <style>
+            html {
+                font-size: 36px;
+            }
+            body {
+                background-color: rgb(103, 198, 179);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            table, td, th {
+                border: 0.05rem solid black;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+
+            td, th {
+                padding: 0.5rem;
+            }
+
+            #app {
+                background-color: aliceblue;
+                padding: 2rem;
+                border-radius: 1rem;
+                max-width: 20rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            button {
+                width: 3rem;
+                max-height: 3rem;
+                height: fit-content;
+                border-radius: 0.5rem;
+                border: 0.065rem solid black;
+                transition: border 0.2s ease;
+            }
+
+            button:hover {
+                border: 0.065rem solid rgb(103, 198, 179);
+            }
+
+            span {
+                font-size: 0.5rem;
+                color: black;
+                transition: color 0.1s;
+            }
+
+            button:hover span {
+                color: rgb(103, 198, 179);
+            }
+        </style>
     </head>
     <body>
         <div id="app"></div>
@@ -14,12 +70,12 @@
 
 
                 render() {
-                    const rows = this.props.card.map((card, i) => {
+                    const rows = this.props.cards.map((card, i) => {
                         return (
                             <tr key={i}>
                                 <td>{card.front}</td>
                                 <td>{card.back}</td>
-                                <td><button>Delete</button></td>
+                                <td><button><span>Delete</span></button></td>
                             </tr>
                         )
                     })
@@ -40,7 +96,7 @@
                                 </tbody>
                             </table>
                             <hr />
-                            <button onClick={this.props.switchMode}>Go to viewer</button>
+                            <button onClick={this.props.switchMode}><span>Go to viewer</span></button>
                         </div>
                     )
                 }
