@@ -19,18 +19,19 @@
                 constructor(props) {
                     super(props)
                     this.state = {
+                        id: Date.now(),
                         frontInput: "",
                         backInput: ""
                     }
                 }
 
                 render() {
-                    const rows = this.props.cards.map((card, i) => {
+                    const rows = this.props.cards.map((card) => {
                         return (
-                            <tr key={i}>
+                            <tr key={card.id}>
                                 <td>{card.front}</td>
                                 <td>{card.back}</td>
-                                <td><button data-index={i} onClick={this.deleteCard}><span>Delete</span></button></td>
+                                <td><button data-id={card.id} onClick={this.deleteCard}><span>Delete</span></button></td>
                             </tr>
                         )
                     })
@@ -79,7 +80,7 @@
 
                 addCard = () => {
                     if (this.state.frontInput.length > 0 && this.state.backInput.length > 0) {
-                        const newCard = {front: this.state.frontInput, back: this.state.backInput};
+                        const newCard = {id: this.state.id, front: this.state.frontInput, back: this.state.backInput};
                         this.props.addCard(newCard)
                         this.setState({
                             frontInput: "",
@@ -89,7 +90,8 @@
                 }
 
                 deleteCard = (event) => {
-                    this.props.deleteCard(event.target.dataset.index)
+                    console.log(event.currentTarget.getAttribute("data-id"))
+                    this.props.deleteCard(parseInt(event.currentTarget.getAttribute("data-id")))
                 }
                 
             }
@@ -104,13 +106,6 @@
                 }
 
                 render() {
-                    // const displayCard = this.props.cards.map((card, i) => {
-                    //     return (
-                    //         <div key={i}>
-                    //             {card.front}
-                    //         </div>
-                    //     )
-                    // })
 
                     const frontOrBack = () => {
                         if (this.state.front) {
@@ -209,9 +204,9 @@
                     super(props);
                     this.state = {
                         editor: true,
-                        cards: [{front: "1+1", back: "2"},
-                                {front: "2+2", back: "4"},
-                                {front: "Explain how Juliet's feelings were portrayed in Act 2 of Shakespeare's 'Romeo and Juliet' [30 marks]", back: "At the beginning of Act 2, Juliet seems extremely joyful at the hint of Romeo's interest in her, as denoted by the quote '...' which implies..."}
+                        cards: [{id: 1, front: "1+1", back: "2"},
+                                {id: 2, front: "2+2", back: "4"},
+                                {id: 3, front: "Explain how Juliet's feelings were portrayed in Act 2 of Shakespeare's 'Romeo and Juliet' [30 marks]", back: "At the beginning of Act 2, Juliet seems extremely joyful at the hint of Romeo's interest in her, as denoted by the quote '...' which implies..."}
                         ]
                     };
                 }
@@ -247,14 +242,11 @@
                     })
                 }
 
-                deleteCard = (index) => {
-                    this.setState(state => {
-                        const cardsCopy = [...state.cards];
-                        cardsCopy.splice(index, 1);
-                        return {
-                            cards: cardsCopy
-                        }
-                    })
+                deleteCard = (idToRemove) => {
+                    const isNotTheDeletedCard = (card) => card.id !== idToRemove;
+                    this.setState(state => ({
+                        cards: (state.cards.filter(isNotTheDeletedCard))
+                    }))
                 }
 
                 switchMode = () => {
