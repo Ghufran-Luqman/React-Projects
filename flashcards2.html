@@ -75,7 +75,7 @@
                             <tr key={i}>
                                 <td>{card.front}</td>
                                 <td>{card.back}</td>
-                                <td><button><span>Delete</span></button></td>
+                                <td><button data-index={i} onClick={this.props.deleteCard}><span>Delete</span></button></td>
                             </tr>
                         )
                     })
@@ -100,6 +100,8 @@
                         </div>
                     )
                 }
+
+                
             }
 
             class CardViewer extends React.Component {
@@ -108,7 +110,7 @@
                         <div>
                             This is the Viewer.
                             <hr />
-                            <button onClick={this.props.switchMode}>Go to editor</button>
+                            <button onClick={this.props.switchMode}><span>Go to editor</span></button>
                         </div>
                     );
                 }
@@ -131,6 +133,7 @@
                             <CardEditor 
                                 cards = {this.state.cards}
                                 switchMode = {this.switchMode}
+                                deleteCard = {this.deleteCard}
                             />
                         );
                     } else {
@@ -141,6 +144,17 @@
                             />
                         );
                     }
+                }
+
+                deleteCard = (event) => {
+                    const index = event.currentTarget.dataset.index;
+                    this.setState(state => {
+                        const cardsCopy = [...state.cards];
+                        cardsCopy.splice(index, 1);
+                        return {
+                            cards: cardsCopy
+                        }
+                    })
                 }
 
                 switchMode = () => {
