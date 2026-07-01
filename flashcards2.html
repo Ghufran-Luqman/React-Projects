@@ -60,6 +60,35 @@
             button:hover span {
                 color: rgb(103, 198, 179);
             }
+
+            #form {
+                margin-bottom: 0.5rem;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            input {
+                text-align: center;
+                margin-right: 0.2rem;
+                width: 3rem;
+                height: 1rem;
+                border-radius: 0.3rem;
+                border: 0.065rem solid black;
+                transition: border 0.2s ease;
+            }
+
+            #inputs {
+                display: flex;
+                flex-direction: row;
+                margin-right: 0.5rem;
+            }
+
+            #underhr {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
         </style>
     </head>
     <body>
@@ -102,10 +131,16 @@
                                 </tbody>
                             </table>
                             <hr />
-                            <input autoFocus name="front" placeholder="Enter front of new card" value={this.state.frontInput} onChange={this.updateResponse}></input>
-                            <input name="back" placeholder="Enter back of new card" value={this.state.backInput} onChange={this.updateResponse}></input>
-                            <button onClick={this.addCard}>Add Card</button>
-                            <button onClick={this.props.switchMode}><span>Go to viewer</span></button>
+                            <div id='underhr'>
+                                <div id='form'>
+                                    <div id='inputs'>
+                                        <input autoFocus name="front" placeholder="Front of new card" value={this.state.frontInput} onChange={this.updateResponse}></input>
+                                        <input name="back" placeholder="Back of new card" value={this.state.backInput} onChange={this.updateResponse}></input>
+                                    </div>
+                                    <button onClick={this.addCard}><span>Add Card</span></button>
+                                </div>
+                                <button onClick={this.props.switchMode}><span>Go to viewer</span></button>
+                            </div>
                         </div>
                     )
                 }
@@ -154,8 +189,7 @@
                     super(props);
                     this.state = {
                         editor: true,
-                        cards: [{front: "1front", back: "1back"},
-                                {front: "2front", back: "2back"}]
+                        cards: []
                     };
                 }
 
