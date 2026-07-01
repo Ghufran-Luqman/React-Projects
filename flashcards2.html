@@ -67,7 +67,13 @@
         <script type="text/babel">
 
             class CardEditor extends React.Component {
-
+                constructor(props) {
+                    super(props)
+                    this.state = {
+                        frontInput: "",
+                        backInput: ""
+                    }
+                }
 
                 render() {
                     const rows = this.props.cards.map((card, i) => {
@@ -75,7 +81,7 @@
                             <tr key={i}>
                                 <td>{card.front}</td>
                                 <td>{card.back}</td>
-                                <td><button data-index={i} onClick={this.props.deleteCard}><span>Delete</span></button></td>
+                                <td><button data-index={i} onClick={this.deleteCard}><span>Delete</span></button></td>
                             </tr>
                         )
                     })
@@ -96,11 +102,38 @@
                                 </tbody>
                             </table>
                             <hr />
+                            <input autoFocus name="front" placeholder="Enter front of new card" value={this.state.frontInput} onChange={this.updateResponse}></input>
+                            <input name="back" placeholder="Enter back of new card" value={this.state.backInput} onChange={this.updateResponse}></input>
+                            <button onClick={this.addCard}>Add Card</button>
                             <button onClick={this.props.switchMode}><span>Go to viewer</span></button>
                         </div>
                     )
                 }
 
+                updateResponse = (event) => {
+                    if (event.target.name == "front") {
+                        this.setState({
+                            frontInput: event.target.value
+                        })
+                    } else {
+                        this.setState({
+                            backInput: event.target.value
+                        })
+                    }
+                }
+
+                addCard = () => {
+                    const newCard = {front: this.state.frontInput, back: this.state.backInput};
+                    this.props.addCard(newCard)
+                    this.setState({
+                        frontInput: "",
+                        backInput: ""
+                    })
+                }
+
+                deleteCard = (event) => {
+                    this.props.deleteCard(event.target.dataset.index)
+                }
                 
             }
 
@@ -134,6 +167,7 @@
                                 cards = {this.state.cards}
                                 switchMode = {this.switchMode}
                                 deleteCard = {this.deleteCard}
+                                addCard = {this.addCard}
                             />
                         );
                     } else {
@@ -146,8 +180,17 @@
                     }
                 }
 
-                deleteCard = (event) => {
-                    const index = event.currentTarget.dataset.index;
+                addCard = (newCard) => {
+                    // newCard = {front: "x", back: "y"}
+                    this.setState(state => {
+                        const cardsCopy = [...state.cards, newCard];
+                        return {
+                            cards: cardsCopy
+                        }
+                    })
+                }
+
+                deleteCard = (index) => {
                     this.setState(state => {
                         const cardsCopy = [...state.cards];
                         cardsCopy.splice(index, 1);
