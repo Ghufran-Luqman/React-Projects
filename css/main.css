@@ -45,7 +45,7 @@ table, td, th {
 table {
     border-collapse: collapse;
     min-width: 20rem;
-    
+
 }
 
 td, th {
@@ -60,6 +60,11 @@ td, th {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 25rem;
+}
+
+main {
+    min-width: 15rem;
 }
 
 button {
