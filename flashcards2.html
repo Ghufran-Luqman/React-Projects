@@ -5,91 +5,11 @@
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
         <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
         <title>Flashcards 2</title>
-        <style>
-            html {
-                font-size: 36px;
-            }
-            body {
-                background-color: rgb(103, 198, 179);
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            table, td, th {
-                border: 0.05rem solid black;
-            }
-
-            table {
-                border-collapse: collapse;
-            }
-
-            td, th {
-                padding: 0.5rem;
-            }
-
-            #app {
-                background-color: aliceblue;
-                padding: 2rem;
-                border-radius: 1rem;
-                max-width: 20rem;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            button {
-                width: 3rem;
-                max-height: 3rem;
-                height: fit-content;
-                border-radius: 0.5rem;
-                border: 0.065rem solid black;
-                transition: border 0.2s ease;
-            }
-
-            button:hover {
-                border: 0.065rem solid rgb(103, 198, 179);
-            }
-
-            span {
-                font-size: 0.5rem;
-                color: black;
-                transition: color 0.1s;
-            }
-
-            button:hover span {
-                color: rgb(103, 198, 179);
-            }
-
-            #form {
-                margin-bottom: 0.5rem;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-            }
-
-            input {
-                text-align: center;
-                margin-right: 0.2rem;
-                width: 3rem;
-                height: 1rem;
-                border-radius: 0.3rem;
-                border: 0.065rem solid black;
-                transition: border 0.2s ease;
-            }
-
-            #inputs {
-                display: flex;
-                flex-direction: row;
-                margin-right: 0.5rem;
-            }
-
-            #underhr {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-        </style>
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Pixel&display=swap" rel="stylesheet">
     </head>
     <body>
         <div id="app"></div>
@@ -134,8 +54,8 @@
                             <div id='underhr'>
                                 <div id='form'>
                                     <div id='inputs'>
-                                        <input autoFocus name="front" placeholder="Front of new card" value={this.state.frontInput} onChange={this.updateResponse}></input>
-                                        <input name="back" placeholder="Back of new card" value={this.state.backInput} onChange={this.updateResponse}></input>
+                                        <input autoFocus name="front" placeholder="Front" value={this.state.frontInput} onChange={this.updateResponse}></input>
+                                        <input name="back" placeholder="Back" value={this.state.backInput} onChange={this.updateResponse}></input>
                                     </div>
                                     <button onClick={this.addCard}><span>Add Card</span></button>
                                 </div>
@@ -158,12 +78,14 @@
                 }
 
                 addCard = () => {
-                    const newCard = {front: this.state.frontInput, back: this.state.backInput};
-                    this.props.addCard(newCard)
-                    this.setState({
-                        frontInput: "",
-                        backInput: ""
-                    })
+                    if (this.state.frontInput.length > 0 && this.state.backInput.length > 0) {
+                        const newCard = {front: this.state.frontInput, back: this.state.backInput};
+                        this.props.addCard(newCard)
+                        this.setState({
+                            frontInput: "",
+                            backInput: ""
+                        })
+                    }
                 }
 
                 deleteCard = (event) => {
@@ -173,14 +95,112 @@
             }
 
             class CardViewer extends React.Component {
+                constructor(props) {
+                    super(props)
+                    this.state = {
+                        front: true,
+                        cardIndex: 0
+                    }
+                }
+
                 render() {
+                    // const displayCard = this.props.cards.map((card, i) => {
+                    //     return (
+                    //         <div key={i}>
+                    //             {card.front}
+                    //         </div>
+                    //     )
+                    // })
+
+                    const frontOrBack = () => {
+                        if (this.state.front) {
+                            return (
+                                <div>
+                                    <div id='card'>
+                                        {this.props.cards[this.state.cardIndex].front}
+                                    </div>
+                                </div>
+                            )
+                        } else {
+                            return (
+                                <div>
+                                    <div id='card'>
+                                        {this.props.cards[this.state.cardIndex].back}
+                                    </div>
+                                </div>
+                            )
+                        }
+                    }
+
+                    
+
                     return (
                         <div>
-                            This is the Viewer.
+                            <h1>This is the Viewer.</h1>
+                            {
+                                !(this.props.cards.length === 0) ?
+
+                                <div>
+                                {frontOrBack()}
+                                <div id='cardControls'>
+                                    {this.state.front ? 
+                                        <div><button onClick={this.switchFront}><span>Show back</span></button></div>
+                                        : 
+                                        <div>
+                                            <button onClick={this.switchFront}><span>Show front</span></button>
+                                        </div>
+                                    }
+                                    <div id='arrows'>
+                                        {this.state.cardIndex > 0 ? 
+                                            <div><button onClick={this.decrementCard}><span>&lt;</span></button></div> 
+                                            : 
+                                            null
+                                        }
+
+                                        {!(this.state.cardIndex === this.props.cards.length-1) ?
+                                            <div><button onClick={this.incrementCard}><span>&#62;</span></button></div>
+                                            :
+                                            null
+                                        }
+                                    </div>
+                                </div>
+                                </div>
+
+                                :
+
+                                <div id='noCards'>
+                                    <h4>No Cards!</h4>
+                                    <p>Add some!</p>
+                                </div>
+                            }
                             <hr />
                             <button onClick={this.props.switchMode}><span>Go to editor</span></button>
                         </div>
                     );
+                }
+
+                decrementCard = () => {
+                    this.setState(state => {
+                        return {
+                            cardIndex: state.cardIndex - 1,
+                            front: true
+                        }
+                    })
+                }
+                
+                incrementCard = () => {
+                    this.setState(state => {
+                        return {
+                            cardIndex: state.cardIndex + 1,
+                            front: true
+                        }
+                    })
+                }
+
+                switchFront = () => {
+                    this.setState(state => ({
+                        front: !state.front
+                    }))
                 }
             }
 
@@ -189,7 +209,10 @@
                     super(props);
                     this.state = {
                         editor: true,
-                        cards: []
+                        cards: [{front: "1+1", back: "2"},
+                                {front: "2+2", back: "4"},
+                                {front: "Explain how Juliet's feelings were portrayed in Act 2 of Shakespeare's 'Romeo and Juliet' [30 marks]", back: "At the beginning of Act 2, Juliet seems extremely joyful at the hint of Romeo's interest in her, as denoted by the quote '...' which implies..."}
+                        ]
                     };
                 }
 
