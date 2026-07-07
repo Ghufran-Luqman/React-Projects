@@ -120,19 +120,6 @@ input:focus {
     border: 0.065rem solid rgb(103, 198, 179);
 }
 
-/* input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: 0.065rem solid #ccc;
-  transition: 0.5s;
-
-}
-
-input:focus {
-  border: 0.065rem solid #555;
-} */
 
 #inputs {
     display: flex;

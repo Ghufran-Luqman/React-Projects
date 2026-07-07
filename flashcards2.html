@@ -148,6 +148,9 @@
                                                 <button class='button' onClick={this.switchFront}><span>Show front</span></button>
                                             </div>
                                         }
+                                        <div>
+                                            <button class='button' onClick={this.shuffle}><span>Shuffle</span></button>
+                                        </div>
                                         <div id='arrows'>
                                             {this.state.cardIndex > 0 ? 
                                                 <div><button class='button' onClick={this.decrementCard}><span>&lt;</span></button></div> 
@@ -175,6 +178,27 @@
                             <button class='button' onClick={this.props.switchMode}><span>Go to editor</span></button>
                         </main>
                     );
+                }
+
+                shuffle = () => {
+                    const randomIndex = this.randomIndexThatIsntTheSame()
+                    console.log(randomIndex)
+                    this.setState(state => {
+                        return {
+                            cardIndex: randomIndex,
+                            front: true
+                        }
+                    })
+                }
+
+                randomIndexThatIsntTheSame = () => {
+                    const min = 0
+                    const max = this.props.cards.length - 1
+                    let randomIndex = Math.ceil(Math.random() * max)
+                    while (randomIndex === this.state.cardIndex) {
+                        randomIndex = Math.ceil(Math.random() * max)
+                    }
+                    return randomIndex
                 }
 
                 decrementCard = () => {
@@ -209,7 +233,10 @@
                         editor: true,
                         cards: [{id: 1, front: "1+1", back: "2"},
                                 {id: 2, front: "2+2", back: "4"},
-                                {id: 3, front: "Explain how Juliet's feelings were portrayed in Act 2 of Shakespeare's 'Romeo and Juliet' [30 marks]", back: "At the beginning of Act 2, Juliet seems extremely joyful at the hint of Romeo's interest in her, as denoted by the quote '...', which implies..."}
+                                {id: 3, front: "4+4", back: "8"},
+                                {id: 4, front: "8+8", back: "16"},
+                                {id: 5, front: "16+16", back: "32"},
+                                {id: 6, front: "Explain how Juliet's feelings were portrayed in Act 2 of Shakespeare's 'Romeo and Juliet' [30 marks]", back: "At the beginning of Act 2, Juliet seems extremely joyful at the hint of Romeo's interest in her, as denoted by the quote '...', which implies..."}
                         ]
                     };
                 }
