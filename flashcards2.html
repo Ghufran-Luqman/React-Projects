@@ -31,7 +31,7 @@
                             <tr key={card.id}>
                                 <td>{card.front}</td>
                                 <td>{card.back}</td>
-                                <td><button data-id={card.id} onClick={this.deleteCard}><span>Delete</span></button></td>
+                                <td><button class='button' data-id={card.id} onClick={this.deleteCard}><span>Delete</span></button></td>
                             </tr>
                         )
                     })
@@ -58,9 +58,9 @@
                                         <input autoFocus name="front" placeholder="Front" value={this.state.frontInput} onChange={this.updateResponse}></input>
                                         <input name="back" placeholder="Back" value={this.state.backInput} onChange={this.updateResponse}></input>
                                     </div>
-                                    <button onClick={this.addCard}><span>Add Card</span></button>
+                                    <button class='button' onClick={this.addCard}><span>Add Card</span></button>
                                 </div>
-                                <button onClick={this.props.switchMode}><span>Go to viewer</span></button>
+                                <button class='button' onClick={this.props.switchMode}><span>Go to viewer</span></button>
                             </div>
                         </div>
                     )
@@ -90,7 +90,6 @@
                 }
 
                 deleteCard = (event) => {
-                    console.log(event.currentTarget.getAttribute("data-id"))
                     this.props.deleteCard(parseInt(event.currentTarget.getAttribute("data-id")))
                 }
                 
@@ -112,7 +111,9 @@
                             return (
                                 <div>
                                     <div id='card'>
-                                        {this.props.cards[this.state.cardIndex].front}
+                                        <button class='viewFlashcardButton' onClick={this.switchFront}>
+                                            <span>{this.props.cards[this.state.cardIndex].front}</span>
+                                        </button>
                                     </div>
                                 </div>
                             )
@@ -120,7 +121,9 @@
                             return (
                                 <div>
                                     <div id='card'>
-                                        {this.props.cards[this.state.cardIndex].back}
+                                        <button class='viewFlashcardButton' onClick={this.switchFront}>
+                                            <span>{this.props.cards[this.state.cardIndex].back}</span>
+                                        </button>
                                     </div>
                                 </div>
                             )
@@ -136,29 +139,29 @@
                                 !(this.props.cards.length === 0) ?
 
                                 <div>
-                                {frontOrBack()}
-                                <div id='cardControls'>
-                                    {this.state.front ? 
-                                        <div><button onClick={this.switchFront}><span>Show back</span></button></div>
-                                        : 
-                                        <div>
-                                            <button onClick={this.switchFront}><span>Show front</span></button>
-                                        </div>
-                                    }
-                                    <div id='arrows'>
-                                        {this.state.cardIndex > 0 ? 
-                                            <div><button onClick={this.decrementCard}><span>&lt;</span></button></div> 
+                                    {frontOrBack()}
+                                    <div id='cardControls'>
+                                        {this.state.front ? 
+                                            <div><button class='button' onClick={this.switchFront}><span>Show back</span></button></div>
                                             : 
-                                            null
+                                            <div>
+                                                <button class='button' onClick={this.switchFront}><span>Show front</span></button>
+                                            </div>
                                         }
+                                        <div id='arrows'>
+                                            {this.state.cardIndex > 0 ? 
+                                                <div><button class='button' onClick={this.decrementCard}><span>&lt;</span></button></div> 
+                                                : 
+                                                null
+                                            }
 
-                                        {!(this.state.cardIndex === this.props.cards.length-1) ?
-                                            <div><button onClick={this.incrementCard}><span>&#62;</span></button></div>
-                                            :
-                                            null
-                                        }
+                                            {!(this.state.cardIndex === this.props.cards.length-1) ?
+                                                <div><button class='button' onClick={this.incrementCard}><span>&#62;</span></button></div>
+                                                :
+                                                null
+                                            }
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
 
                                 :
@@ -169,7 +172,7 @@
                                 </div>
                             }
                             <hr />
-                            <button onClick={this.props.switchMode}><span>Go to editor</span></button>
+                            <button class='button' onClick={this.props.switchMode}><span>Go to editor</span></button>
                         </main>
                     );
                 }
@@ -206,7 +209,7 @@
                         editor: true,
                         cards: [{id: 1, front: "1+1", back: "2"},
                                 {id: 2, front: "2+2", back: "4"},
-                                {id: 3, front: "Explain how Juliet's feelings were portrayed in Act 2 of Shakespeare's 'Romeo and Juliet' [30 marks]", back: "At the beginning of Act 2, Juliet seems extremely joyful at the hint of Romeo's interest in her, as denoted by the quote '...' which implies..."}
+                                {id: 3, front: "Explain how Juliet's feelings were portrayed in Act 2 of Shakespeare's 'Romeo and Juliet' [30 marks]", back: "At the beginning of Act 2, Juliet seems extremely joyful at the hint of Romeo's interest in her, as denoted by the quote '...', which implies..."}
                         ]
                     };
                 }
@@ -233,7 +236,7 @@
                 }
 
                 addCard = (newCard) => {
-                    // newCard = {front: "x", back: "y"}
+                    // newCard = {id: x, front: "y", back: "z"}
                     this.setState(state => {
                         const cardsCopy = [...state.cards, newCard];
                         return {
