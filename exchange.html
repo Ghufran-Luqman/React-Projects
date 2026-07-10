@@ -36,9 +36,8 @@
                                 <select onChange={this.makeSelection} name="other" value={this.state.other}>
                                     {this.currencies.map(currency => <option key={currency} value={currency}>{currency}</option>)}
                                 </select>
-                                <input disabled={true} value={this.state.converted} />
+                                <input disabled={true} value={this.state.converted === null ? "Calculating..." : this.state.converted} />
                             </div>
-                            <button onClick={this.recalculate}>Calculate</button>
                         </div>
                     );
                 }
@@ -61,7 +60,8 @@
 
                 changeValue = (event) => {
                     this.setState({
-                        value: event.target.value
+                        value: event.target.value,
+                        converted: null
                     }, this.recalculate);
                 } // so it's some special syntax, if we just put this.recalculate below there's a chance it would happen before the first thing happened
                 // so this.setState can take two things and here it's just saying to do the first thing then do the second after the first is done executing
