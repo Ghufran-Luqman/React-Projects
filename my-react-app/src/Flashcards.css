@@ -1,0 +1,202 @@
+/*fonts*/
+
+
+.geist-pixel-myfont {
+  font-family: "Geist Pixel", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "ELSH" 0;
+}
+
+
+/*actual stuff*/
+
+html {
+    font-size: 40px;
+}
+
+nav {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+body {
+    background-color: rgb(103, 198, 179);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Geist Pixel", sans-serif;
+}
+
+.flashcards-app-container {
+    background-color: aliceblue;
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 25rem;
+    margin-top: 0.7rem; /* Moved from old #app rule */
+}
+
+.flashcards-app-container h1, 
+.flashcards-app-container h4 {
+    font-size: 30px;
+}
+
+.flashcards-app-container p {
+    font-size: 20px;
+}
+
+.flashcards-app-container #root {
+    margin-top: 0.7rem;
+}
+
+
+.flashcards-app-container h4 {
+    font-size: 30px;
+}
+
+.flashcards-app-container p {
+    font-size: 20px
+}
+
+.flashcards-app-container table, td, th {
+    border: 0.05rem solid black;
+}
+
+.flashcards-app-container table {
+    border-collapse: collapse;
+    min-width: 20rem;
+
+}
+
+.flashcards-app-container td, th {
+    padding: 0.5rem;
+}
+
+.flashcards-app-container #root {
+    background-color: aliceblue;
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 25rem;
+}
+
+.flashcards-app-container main {
+    min-width: 15rem;
+}
+
+.flashcards-app-container .button {
+    min-width: 3rem;
+    min-height: 1rem;
+    border-radius: 0.5rem;
+    border: 0.065rem solid black;
+    transition: border 0.2s ease;
+    margin: 0.1rem;
+}
+
+.flashcards-app-container .button:hover {
+    border: 0.065rem solid rgb(103, 198, 179);
+}
+
+
+.flashcards-app-container span {
+    font-size: 0.6rem;
+    color: black;
+    transition: color 0.1s;
+    font-family: "Geist Pixel", sans-serif;
+}
+
+.flashcards-app-container .button:hover span {
+    color: rgb(103, 198, 179);
+}
+
+
+.flashcards-app-container #form {
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flashcards-app-container input {
+    text-align: center;
+    margin-right: 0.2rem;
+    width: 3rem;
+    height: 1rem;
+    border-radius: 0.3rem;
+    border: 0.065rem solid black;
+    transition: 0.2s ease;
+    font-size: 0.5rem;
+    outline: none
+}
+
+.flashcards-app-container input:hover {
+    border: 0.065rem solid rgb(103, 198, 179);
+}
+
+.flashcards-app-container input:focus {
+    border: 0.065rem solid rgb(103, 198, 179);
+}
+
+
+.flashcards-app-container #inputs {
+    display: flex;
+    flex-direction: row;
+    margin-right: 0.5rem;
+}
+
+.flashcards-app-container #underhr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flashcards-app-container #card {
+    border: 0.075rem solid black;
+    border-radius: 0.4rem;
+    background-color: rgb(196, 255, 244);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.flashcards-app-container #cardControls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flashcards-app-container .viewFlashcardButton {
+    background-color: rgba(255, 99, 71, 0);
+    border: none;
+    padding: 2rem;
+    margin: none;
+    width: 100%;
+    height: 100%;
+}
+
+.flashcards-app-container .viewFlashcardButton span {
+    font-size: 0.95rem;
+}
+
+.flashcards-app-container #arrows {
+    display: flex;
+    flex-direction: row;
+}
+
+.flashcards-app-container #noCards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin-top: 0.25rem;
+}

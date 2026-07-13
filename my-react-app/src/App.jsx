@@ -1,0 +1,79 @@
+import { Component } from 'react';
+
+export default class App extends Component {
+
+  constructor(props) {
+      super(props);
+      this.currencies = ["AUD", "CAD", "CHF", "CNY", "INR", "USD", "EUR", "GBP", "JPY", "NZD"];
+      this.state = {
+          base: "GBP",
+          other: "USD",
+          value: 0,
+          converted: 0
+      };
+      this.cached = {}
+  }
+
+  render() {
+      return (
+          <div>
+              <div>
+                  <select onChange={this.makeSelection} name="base" value={this.state.base}>
+                      {this.currencies.map(currency => <option key={currency} value={currency}>{currency}</option>)}
+                  </select>
+                  <input value={this.state.value} onChange={this.changeValue} />
+              </div>
+              <div>
+                  <select onChange={this.makeSelection} name="other" value={this.state.other}>
+                      {this.currencies.map(currency => <option key={currency} value={currency}>{currency}</option>)}
+                  </select>
+                  <input disabled={true} value={this.state.converted === null ? "Calculating..." : this.state.converted} />
+              </div>
+          </div>
+      );
+  }
+
+  recalculate = () => {
+      const value = parseFloat(this.state.value);
+      if(isNaN(value)) {
+          return;
+      }
+
+      const cacheKey = `${this.state.base}-${this.state.other}`;
+
+      if (this.cached[cacheKey] !== undefined && Date.now() - this.cached[cacheKey].timestamp < 1000*60) { // returns time in milliseconds (1000*60 is a minute)
+          this.setState({
+              converted: this.cached[cacheKey].rates * value
+          })
+          return;
+      }
+
+      fetch(`https://api.frankfurter.dev/v2/rates?base=${this.state.base}&quotes=${this.state.other}`)
+      .then(response => response.json())
+      .then(data => {
+          this.cached[cacheKey] = {
+              rates: data[0].rate,
+              timestamp: Date.now()
+          };
+          const converted = data[0].rate * value;
+          this.setState({
+              converted: converted
+          });
+      });
+  }
+
+  changeValue = (event) => {
+      this.setState({
+          value: event.target.value,
+          converted: null
+      }, this.recalculate);
+  } // so it's some special syntax, if we just put this.recalculate below there's a chance it would happen before the first thing happened
+  // so this.setState can take two things and here it's just saying to do the first thing then do the second after the first is done executing
+  
+
+  makeSelection = (event) => {
+      this.setState({
+          [event.target.name]: event.target.value
+      }, this.recalculate);
+  }
+}
