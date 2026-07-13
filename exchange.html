@@ -14,13 +14,14 @@
 
                 constructor(props) {
                     super(props);
-                    this.currencies = ["AUD", "CAD", "CHF,", "CNY", "INR", "USD", "EUR", "GBP", "JPY", "NZD"];
+                    this.currencies = ["AUD", "CAD", "CHF", "CNY", "INR", "USD", "EUR", "GBP", "JPY", "NZD"];
                     this.state = {
                         base: "GBP",
                         other: "USD",
                         value: 0,
                         converted: 0
                     };
+                    this.cached = {}
                 }
 
                 render() {
@@ -48,9 +49,21 @@
                         return;
                     }
 
+
+                    if (this.cached[this.state.base] !== undefined && Date.now() - this.cached[this.state.base].timestamp < 1000*60) { // returns time in milliseconds (1000*60 is a minute)
+                        this.setState({
+                            converted: this.cached[this.state.base].rates * value
+                        })
+                        return;
+                    }
+
                     fetch(`https://api.frankfurter.dev/v2/rates?base=${this.state.base}&quotes=${this.state.other}`)
                     .then(response => response.json())
                     .then(data => {
+                        this.cached[this.state.base] = {
+                            rates: data[0].rate,
+                            timestamp: Date.now()
+                        };
                         const converted = data[0].rate * value;
                         this.setState({
                             converted: converted
