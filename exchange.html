@@ -49,10 +49,11 @@
                         return;
                     }
 
+                    const cacheKey = `${this.state.base}-${this.state.other}`;
 
-                    if (this.cached[this.state.base] !== undefined && Date.now() - this.cached[this.state.base].timestamp < 1000*60) { // returns time in milliseconds (1000*60 is a minute)
+                    if (this.cached[cacheKey] !== undefined && Date.now() - this.cached[cacheKey].timestamp < 1000*60) { // returns time in milliseconds (1000*60 is a minute)
                         this.setState({
-                            converted: this.cached[this.state.base].rates * value
+                            converted: this.cached[cacheKey].rates * value
                         })
                         return;
                     }
@@ -60,7 +61,7 @@
                     fetch(`https://api.frankfurter.dev/v2/rates?base=${this.state.base}&quotes=${this.state.other}`)
                     .then(response => response.json())
                     .then(data => {
-                        this.cached[this.state.base] = {
+                        this.cached[cacheKey] = {
                             rates: data[0].rate,
                             timestamp: Date.now()
                         };
