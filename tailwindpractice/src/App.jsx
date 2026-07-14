@@ -35,7 +35,7 @@ function App() {
         )}
         
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 dark:bg-slate-700 dark:text-slate-700 text-white p-5 gap-4 text-center font-semibold text-2xl sm:text-lg">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 dark:bg-slate-900 dark:text-slate-700 text-white p-5 gap-4 text-center font-semibold text-2xl sm:text-lg">
         <div className="bg-slate-500 dark:bg-slate-200 p-3 rounded hover:bg-slate-600 dark:hover:bg-slate-300 hover:scale-102 transition-all duration-300">Feature One</div>
         <div className="bg-slate-500 dark:bg-slate-200 p-3 rounded hover:bg-slate-600 dark:hover:bg-slate-300 hover:scale-102">Feature Two</div>
         <div className="bg-slate-500 dark:bg-slate-200 p-3 rounded hover:bg-slate-600 dark:hover:bg-slate-300">Feature Three</div>
