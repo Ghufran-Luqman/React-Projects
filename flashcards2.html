@@ -148,9 +148,13 @@
                                                 <button class='button' onClick={this.switchFront}><span>Show front</span></button>
                                             </div>
                                         }
-                                        <div>
-                                            <button class='button' onClick={this.shuffle}><span>Shuffle</span></button>
-                                        </div>
+                                        {!(this.props.cards.length <= 1) ?
+                                            <div>
+                                                <button className='button' onClick={this.shuffle}><span>Shuffle</span></button>
+                                            </div>
+                                            :
+                                            null
+                                        }
                                         <div id='arrows'>
                                             {this.state.cardIndex > 0 ? 
                                                 <div><button class='button' onClick={this.decrementCard}><span>&lt;</span></button></div> 
@@ -192,12 +196,14 @@
                 }
 
                 randomIndexThatIsntTheSame = () => {
-                    const min = 0
-                    const max = this.props.cards.length - 1
-                    let randomIndex = Math.ceil(Math.random() * max)
-                    while (randomIndex === this.state.cardIndex) {
-                        randomIndex = Math.ceil(Math.random() * max)
+                    const { cards } = this.props
+                    if (cards.length <= 1) {
+                        return this.state.cardIndex
                     }
+                    let randomIndex
+                    do {
+                        randomIndex = Math.floor(Math.random() * cards.length)
+                    } while (randomIndex === this.state.cardIndex)
                     return randomIndex
                 }
 

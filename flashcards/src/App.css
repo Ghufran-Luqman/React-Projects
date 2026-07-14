@@ -1,0 +1,175 @@
+/*fonts*/
+
+
+.geist-pixel-myfont {
+  font-family: "Geist Pixel", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "ELSH" 0;
+}
+
+
+/*actual stuff*/
+
+html {
+    font-size: 40px;
+}
+
+body {
+    background-color: rgb(103, 198, 179);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Geist Pixel", sans-serif;
+}
+
+#app {
+    margin-top: 0.7rem;
+}
+
+
+h4 {
+    font-size: 30px;
+}
+
+p {
+    font-size: 20px
+}
+
+table, td, th {
+    border: 0.05rem solid black;
+}
+
+table {
+    border-collapse: collapse;
+    min-width: 20rem;
+
+}
+
+td, th {
+    padding: 0.5rem;
+}
+
+#app {
+    background-color: aliceblue;
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 25rem;
+}
+
+main {
+    min-width: 15rem;
+}
+
+.button {
+    min-width: 3rem;
+    min-height: 1rem;
+    border-radius: 0.5rem;
+    border: 0.065rem solid black;
+    transition: border 0.2s ease;
+    margin: 0.1rem;
+}
+
+.button:hover {
+    border: 0.065rem solid rgb(103, 198, 179);
+}
+
+
+span {
+    font-size: 0.6rem;
+    color: black;
+    transition: color 0.1s;
+    font-family: "Geist Pixel", sans-serif;
+}
+
+.button:hover span {
+    color: rgb(103, 198, 179);
+}
+
+
+#form {
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+input {
+    text-align: center;
+    margin-right: 0.2rem;
+    width: 3rem;
+    height: 1rem;
+    border-radius: 0.3rem;
+    border: 0.065rem solid black;
+    transition: 0.2s ease;
+    font-size: 0.5rem;
+    outline: none
+}
+
+input:hover {
+    border: 0.065rem solid rgb(103, 198, 179);
+}
+
+input:focus {
+    border: 0.065rem solid rgb(103, 198, 179);
+}
+
+
+#inputs {
+    display: flex;
+    flex-direction: row;
+    margin-right: 0.5rem;
+}
+
+#underhr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#card {
+    border: 0.075rem solid black;
+    border-radius: 0.4rem;
+    background-color: rgb(196, 255, 244);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#cardControls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.viewFlashcardButton {
+    background-color: rgba(255, 99, 71, 0);
+    border: none;
+    padding: 2rem;
+    margin: none;
+    width: 100%;
+    height: 100%;
+}
+
+.viewFlashcardButton span {
+    font-size: 0.95rem;
+}
+
+#arrows {
+    display: flex;
+    flex-direction: row;
+}
+
+#noCards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin-top: 0.25rem;
+}
