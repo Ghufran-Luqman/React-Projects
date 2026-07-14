@@ -12,7 +12,7 @@ function App() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 text-white p-5 gap-4">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 text-white p-5 gap-4 text-center font-semibold text-2xl sm:text-lg">
         <div className="bg-slate-500 p-3 rounded">Feature One</div>
         <div className="bg-slate-500 p-3 rounded">Feature Two</div>
         <div className="bg-slate-500 p-3 rounded">Feature Three</div>
