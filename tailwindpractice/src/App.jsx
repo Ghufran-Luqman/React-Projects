@@ -1,6 +1,6 @@
 function App() {
   return (
-    <div className="flex items-center justify-between h-12 bg-slate-900 text-white px-4">
+    <div className="flex items-center justify-between bg-slate-900 text-white p-4">
 
       <div className="font-bold">Logo</div>
       <div className="flex gap-2">
