@@ -13,12 +13,12 @@ function App() {
       </div>
 
       <div className="grid sm:grid-cols-2 md:grid-cols-3 text-white p-5 gap-4 text-center font-semibold text-2xl sm:text-lg">
-        <div className="bg-slate-500 p-3 rounded">Feature One</div>
-        <div className="bg-slate-500 p-3 rounded">Feature Two</div>
-        <div className="bg-slate-500 p-3 rounded">Feature Three</div>
-        <div className="bg-slate-500 p-3 rounded">Feature Four</div>
-        <div className="bg-slate-500 p-3 rounded">Feature Five</div>
-        <div className="bg-slate-500 p-3 rounded">Feature Six</div>
+        <div className="bg-slate-500 p-3 rounded hover:bg-slate-600">Feature One</div>
+        <div className="bg-slate-500 p-3 rounded hover:bg-slate-600">Feature Two</div>
+        <div className="bg-slate-500 p-3 rounded hover:bg-slate-600">Feature Three</div>
+        <div className="bg-slate-500 p-3 rounded hover:bg-slate-600">Feature Four</div>
+        <div className="bg-slate-500 p-3 rounded hover:bg-slate-600">Feature Five</div>
+        <div className="bg-slate-500 p-3 rounded hover:bg-slate-600">Feature Six</div>
       </div>
     </div>
   );
