@@ -1,11 +1,12 @@
 function App() {
   return (
-    <div>
+    <div className="flex items-center justify-between h-12 bg-slate-900 text-white px-4">
 
-      <div className="bg-amber-500 p-5">
-        <p className="text-xl font-semibold text-center text-rose-700">
-          Hello World
-         </p>
+      <div className="font-bold">Logo</div>
+      <div className="flex gap-2">
+        <span>Home</span>
+        <span>About</span>
+        <span>Contact</span>
       </div>
     </div>
   );
