@@ -4,7 +4,7 @@ function App() {
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState("light");
   return (
-    <div className={theme}>
+    <div className={`${theme} min-h-screen text-slate-900 dark:bg-slate-900 dark:text-white`}>
       {/* Navbar */}
       <div className="flex items-center justify-between text-slate-900 dark:bg-slate-900 dark:text-white p-4">
         <div className="font-bold">Logo</div>
@@ -14,6 +14,9 @@ function App() {
           <span>Home</span>
           <span>About</span>
           <span>Contact</span>
+          <button className="cursor-pointer" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+              {theme === "light" ? "☾" : "☼" }
+            </button>
         </div>
 
         <button className="cursor-pointer sm:hidden" onClick={() => setOpen(!open)}>&#9776;</button>
@@ -21,7 +24,7 @@ function App() {
       
       {/* Mobile Nav */}
         {open && ( 
-          <div className="flex flex-col items-center p-3 gap-2 text-slate-900 dark:bg-slate-900 dark:text-white sm:hidden">
+          <div className="flex flex-col items-center p-3 gap-2 sm:hidden">
             <span>Home</span>
             <span>About</span>
             <span>Contact</span>
