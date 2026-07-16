@@ -5,7 +5,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      theme: "light",
+      theme: "dark",
       navOpened: false
     }
   }
@@ -21,12 +21,12 @@ class App extends React.Component {
 
           {/* Desktop Nav */}
           <div className="hidden sm:flex gap-2">
-          <span>Home</span>
-          <span>About</span>
-          <span>Contact</span>
-          <button className="cursor-pointer" onClick={this.switchTheme}>
-              {theme === "light" ? "☾" : "☼" }
-              </button>
+            <span>Home</span>
+            <span>About</span>
+            <span>Contact</span>
+            <button className="cursor-pointer" onClick={this.switchTheme}>
+                {theme === "light" ? "☾" : "☼" }
+            </button>
           </div>
 
           <button className="cursor-pointer sm:hidden" onClick={this.openNav}>&#9776;</button>
