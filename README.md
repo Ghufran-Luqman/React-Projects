@@ -2,7 +2,7 @@
 
 These are projects that I have either copied the code from places like CS50 Beyond or specific YouTube videos), or have taken their code as an inspiration and built upon (like with flashcards2.html) - it is built using the class components style of React.
 
-Source code for tailwindpractice: https://www.youtube.com/watch?v=bnfhmr1v028
+Source code for tailwindpractice: https://www.youtube.com/watch?v=bnfhmr1v028  
 Source code for learningfunctionalcomponents: https://youtu.be/G6D9cBaLViA?si=MU17cxz5Q9WSd69t
 
 *NO AI was used to code any of these projects*
